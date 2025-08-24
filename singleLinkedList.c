@@ -4,49 +4,12 @@
 #include "SDB.h"
 #include "singleLinkedList.h"
 
-Node* createList(int numberOfNodes){
-    Node* startNew = NULL;
-    student data;
-    printf("Please Enter Student Number 1 Data: \n");
-    printf("Student ID: ");
-    scanf("%d",&data.Student_ID);
-    printf("Student Year: ");
-    scanf("%d",&data.Student_year);
-    printf("Course 1 ID: ");
-    scanf("%d",&data.Course1_ID);
-    printf("Course 1 Grade: ");
-    scanf("%d",&data.Course1_grade);
-    printf("Course 2 ID: ");
-    scanf("%d",&data.Course2_ID);
-    printf("Course 2 Grade: ");
-    scanf("%d",&data.Course2_grade);
-    printf("Course 3 ID: ");
-    scanf("%d",&data.Course3_ID);
-    printf("Course 3 Grade: ");
-    scanf("%d",&data.Course3_grade);
-    startNew = insertNodeInBegining(startNew,&data);
-    printf("\n\n");
+Node* createList(int numberOfNodes,student* database){
+   Node* startNew = NULL;
+   startNew = insertNodeInBegining(startNew,&database[0]);
 
     for(int i=1;i<numberOfNodes;i++){
-        printf("Please Enter Student Number %d Data: \n",i+1);
-        printf("Student ID: ");
-        scanf("%d",&data.Student_ID);
-        printf("Student Year: ");
-        scanf("%d",&data.Student_year);
-        printf("Course 1 ID: ");
-        scanf("%d",&data.Course1_ID);
-        printf("Course 1 Grade: ");
-        scanf("%d",&data.Course1_grade);
-        printf("Course 2 ID: ");
-        scanf("%d",&data.Course2_ID);
-        printf("Course 2 Grade: ");
-        scanf("%d",&data.Course2_grade);
-        printf("Course 3 ID: ");
-        scanf("%d",&data.Course3_ID);
-        printf("Course 3 Grade: ");
-        scanf("%d",&data.Course3_grade);
-        insertNodeAtEnd(startNew,&data);
-        printf("\n\n");
+        insertNodeAtEnd(startNew,&database[i]);
     }
     return startNew;
 }

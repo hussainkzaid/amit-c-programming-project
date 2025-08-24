@@ -8,7 +8,7 @@ typedef struct linkedList{
     struct linkedList* link;
 }Node;
 
-Node* createList(int numberOfNodes);
+Node* createList(int numberOfNodes,student* database);
 Node* insertNodeInBegining(Node* start,student* data);
 void  insertNodeAtEnd(Node* start,student* data);
 void displayList(Node* start);

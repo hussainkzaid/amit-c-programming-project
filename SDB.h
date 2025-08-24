@@ -1,8 +1,8 @@
 #ifndef SDB_H
 #define SDB_H
 #include "STD.h"
+#define DATABASE_STUDENT 6
 #define DATABASE_MAX_STUDENT 10
-#define DATABASE_MIN_STUDENT 3
 typedef struct SimpleDb
 {
     uint32 Student_ID;
