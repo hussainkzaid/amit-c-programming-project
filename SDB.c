@@ -4,9 +4,9 @@
 #include "SDB.h"
 #include "singleLinkedList.h"
 
-bool SDB_isFull(Node* start){
+bool SDB_isFull(){
     int count_student = 0;
-    Node* ptr = start;
+    Node* ptr = List;
     while(ptr != NULL){
         count_student++;
         ptr = ptr->link;
@@ -17,9 +17,9 @@ bool SDB_isFull(Node* start){
     return true;
 }
 
-uint8 SDB_GetUsedSize(Node* start){
+uint8 SDB_GetUsedSize(){
     int count_student = 0;
-    Node* ptr = start;
+    Node* ptr = List;
     while(ptr != NULL){
         count_student++;
         ptr = ptr->link;
@@ -27,8 +27,7 @@ uint8 SDB_GetUsedSize(Node* start){
     return count_student;
 }
 
-bool SDB_AddEntry(Node* start){
-    Node* New = NULL;
+bool SDB_AddEntry(){
     student data;
     printf("Please Enter Student Data: \n");
     printf("Student ID: ");
@@ -47,7 +46,7 @@ bool SDB_AddEntry(Node* start){
     scanf("%d",&data.Course3_ID);
     printf("Course 3 Grade: ");
     scanf("%d",&data.Course3_grade);
-    insertNodeAtEnd(New,&data);
+    insertNodeAtEnd(List,&data);
     printf("\n\n");
 }
 
@@ -55,8 +54,8 @@ void SDB_DeletEntry(uint32 id){
 
 }
 
-bool SDB_ReadEntry(Node* start,uint32 id){
-    Node* ptr = start;
+bool SDB_ReadEntry(uint32 id){
+    Node* ptr = List;
     if(ptr != NULL){
         while (ptr != NULL){
             if(ptr->info.Student_ID == id){
@@ -73,7 +72,6 @@ bool SDB_ReadEntry(Node* start,uint32 id){
             }
             ptr = ptr->link;
         }
-        printf("This ID Not Existing\n");
         return 0;
     }
 }
@@ -82,8 +80,8 @@ void SDB_GetList(uint8* count,uint32 list){
 
 }
 
-bool SDB_IsIdExist(Node* start,uint32 id){
-    Node* ptr = start;
+bool SDB_IsIdExist(uint32 id){
+    Node* ptr = List;
     if(ptr != NULL){
         while(ptr != NULL){
             if(ptr->info.Student_ID == id){

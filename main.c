@@ -3,7 +3,7 @@
 #include "STD.h"
 #include "SDB.h"
 #include "singleLinkedList.h"
-
+Node* List = NULL;
 int main()
 {
     student arr[DATABASE_STUDENT]={
@@ -14,8 +14,8 @@ int main()
         {6572000,2029,141516,88,151617,82,161718,94},
         {19611971,2024,181920,60,192021,71,202122,84}
         };
-    Node* List = NULL;
     List = createList(DATABASE_STUDENT,&arr[0]);
     displayList(List);
+    SDB_APP();
     return 0;
 }
