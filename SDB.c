@@ -11,14 +11,14 @@ bool SDB_isFull(){
         count_student++;
         ptr = ptr->link;
     }
-    if(count_student < 10){
+    if(count_student < DATABASE_MAX_STUDENT){
         return false;
     }
     return true;
 }
 
 uint8 SDB_GetUsedSize(){
-    int count_student = 0;
+    uint8 count_student = 0;
     Node* ptr = List;
     while(ptr != NULL){
         count_student++;
@@ -27,28 +27,44 @@ uint8 SDB_GetUsedSize(){
     return count_student;
 }
 
-bool SDB_AddEntry(){
+bool SDB_AddEntry() {
     student data;
-    printf("Please Enter Student Data: \n");
+
+    printf("Please Enter Student Data:\n");
+
     printf("Student ID: ");
-    scanf("%d",&data.Student_ID);
+    if (scanf("%d", &data.Student_ID) != 1) return false;
+
     printf("Student Year: ");
-    scanf("%d",&data.Student_year);
+    if (scanf("%d", &data.Student_year) != 1) return false;
+
     printf("Course 1 ID: ");
-    scanf("%d",&data.Course1_ID);
+    if (scanf("%d", &data.Course1_ID) != 1) return false;
+
     printf("Course 1 Grade: ");
-    scanf("%d",&data.Course1_grade);
+    if (scanf("%d", &data.Course1_grade) != 1) return false;
+
     printf("Course 2 ID: ");
-    scanf("%d",&data.Course2_ID);
+    if (scanf("%d", &data.Course2_ID) != 1) return false;
+
     printf("Course 2 Grade: ");
-    scanf("%d",&data.Course2_grade);
+    if (scanf("%d", &data.Course2_grade) != 1) return false;
+
     printf("Course 3 ID: ");
-    scanf("%d",&data.Course3_ID);
+    if (scanf("%d", &data.Course3_ID) != 1) return false;
+
     printf("Course 3 Grade: ");
-    scanf("%d",&data.Course3_grade);
-    insertNodeAtEnd(List,&data);
-    printf("\n\n");
+    if (scanf("%d", &data.Course3_grade) != 1) return false;
+
+    printf("\n");
+
+    if (insertNodeAtEnd(&data)) {
+        return true;
+    } else {
+        return false;
+    }
 }
+
 
 void SDB_DeletEntry(uint32 id){
 
@@ -59,7 +75,7 @@ bool SDB_ReadEntry(uint32 id){
     if(ptr != NULL){
         while (ptr != NULL){
             if(ptr->info.Student_ID == id){
-                printf("Student Data\n\n");
+                printf("\n\nStudent Data\n\n");
                 printf("Student ID: %d\n",ptr->info.Student_ID);
                 printf("Student Year: %d\n",ptr->info.Student_year);
                 printf("Course 1 ID: %d\n",ptr->info.Course1_ID);
@@ -68,16 +84,24 @@ bool SDB_ReadEntry(uint32 id){
                 printf("Course 2 Grade: %d\n",ptr->info.Course2_grade);
                 printf("Course 3 ID: %d\n",ptr->info.Course3_ID);
                 printf("Course 3 Grade: %d\n",ptr->info.Course3_grade);
-                return 1;
+                return true;
             }
             ptr = ptr->link;
         }
-        return 0;
+        return false;
     }
+    return false;
 }
 
-void SDB_GetList(uint8* count,uint32 list){
-
+void SDB_GetList(uint8* count,uint32* list){
+    printf("Total Students ID: %d\n\n",*count);
+    Node* ptr = List;
+    for(uint8 i=0;i<*count;i++){
+        list[i]=ptr->info.Student_ID;
+        printf("Student %d ID: %d\n",i+1,list[i]);
+        ptr = ptr->link;
+    }
+    printf("\n\n");
 }
 
 bool SDB_IsIdExist(uint32 id){
@@ -85,12 +109,12 @@ bool SDB_IsIdExist(uint32 id){
     if(ptr != NULL){
         while(ptr != NULL){
             if(ptr->info.Student_ID == id){
-                return 1;
+                return true;
             }
             ptr = ptr->link;
         }
         printf("This Id Not Existed");
-        return 0;
+        return false;
     }
-    return 0;
+    return false;
 }

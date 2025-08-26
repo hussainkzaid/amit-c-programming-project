@@ -6,40 +6,45 @@
 
 Node* createList(int numberOfNodes,student* database){
    Node* startNew = NULL;
-   startNew = insertNodeInBegining(startNew,&database[0]);
+   startNew = insertNodeInBegining(&database[0]);
 
     for(int i=1;i<numberOfNodes;i++){
-        insertNodeAtEnd(startNew,&database[i]);
+        insertNodeAtEnd(&database[i]);
     }
     return startNew;
 }
-Node* insertNodeInBegining(Node* start,student* data){
+Node* insertNodeInBegining(student* data){
     Node* temp = (Node*)malloc(sizeof(Node));
     if(temp != NULL){
         temp->info = *(data);
 
-        temp->link = start;
-        start = temp;
+        temp->link = List;
+        List = temp;
     }
-    return start;
+    return List;
 }
 
-void  insertNodeAtEnd(Node* start,student* data){
+bool insertNodeAtEnd(student* data){
+    if(SDB_isFull()){
+        printf("Failed..Database Is Full!");
+        return false;
+    }
     Node* temp = (Node*)malloc(sizeof(Node));
     if(temp != NULL){
         temp->info = *(data);
 
-        Node* ptr = start;
+        Node* ptr = List;
         while(ptr->link != NULL){
             ptr = ptr->link;
         }
         ptr->link = temp;
         temp->link = NULL;
     }
+    return true;
 }
-void displayList(Node* start){
-    if(start != NULL){
-        Node* ptr = start;
+void displayList(){
+    if(List != NULL){
+        Node* ptr = List;
         printf("List Elements Are: \n\n");
         int count_student = 1;
         while(ptr != NULL){

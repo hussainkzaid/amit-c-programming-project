@@ -17,12 +17,15 @@ void SDB_APP(){
     printf("8. To exit enter 0 \n");
     printf("Select What You Want : ");
     scanf("%d",&choice);
+    printf("\n\n");
     SDB_action(choice);
     return;
 }
 
 void SDB_action(uint8 choice){
     uint32 id;
+    uint8 count = SDB_GetUsedSize();
+    uint32 list[DATABASE_MAX_STUDENT];
     switch (choice)
     {
         case 1:
@@ -44,7 +47,7 @@ void SDB_action(uint8 choice){
             break;
 
         case 4:
-            //SDB_GetList();
+            SDB_GetList(&count,&list[0]);
             break;
 
         case 5:
@@ -59,6 +62,8 @@ void SDB_action(uint8 choice){
             break;
 
         case 6:
+            printf("Enter The ID: ");
+            scanf("%d",&id);
             SDB_DeletEntry(id);
             break;
 
@@ -70,8 +75,18 @@ void SDB_action(uint8 choice){
                 printf("Database Is Not Full\n\n");
             }
             break;
-        case 8:
+
+        case 0:
+            printf("Have A Good Day <3\n");
             return;
+
+        default:
+            printf("Invalid Input..Please Try Again\n\n");
+            SDB_APP();
     }
+
     SDB_APP();
+
  }
+
+

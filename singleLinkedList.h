@@ -11,8 +11,8 @@ typedef struct linkedList{
 extern Node* List;
 
 Node* createList(int numberOfNodes,student* database);
-Node* insertNodeInBegining(Node* start,student* data);
-void  insertNodeAtEnd(Node* start,student* data);
-void displayList(Node* start);
+Node* insertNodeInBegining(student* data);
+bool  insertNodeAtEnd(student* data);
+void displayList();
 
 #endif
