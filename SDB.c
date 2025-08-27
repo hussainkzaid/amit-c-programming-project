@@ -5,7 +5,7 @@
 #include "singleLinkedList.h"
 
 bool SDB_isFull(){
-    int count_student = 0;
+    uint16 count_student = 0;
     Node* ptr = List;
     while(ptr != NULL){
         count_student++;
@@ -56,8 +56,6 @@ bool SDB_AddEntry() {
     printf("Course 3 Grade: ");
     if (scanf("%d", &data.Course3_grade) != 1) return false;
 
-    printf("\n");
-
     if (insertNodeAtEnd(&data)) {
         return true;
     } else {
@@ -67,7 +65,12 @@ bool SDB_AddEntry() {
 
 
 void SDB_DeletEntry(uint32 id){
-
+    if(deleteNode(id)){
+        printf("Student Data Deleted\n\n\n");
+    }
+    else{
+        printf("This ID Not Existed\n\n\n");
+    }
 }
 
 bool SDB_ReadEntry(uint32 id){
@@ -75,7 +78,7 @@ bool SDB_ReadEntry(uint32 id){
     if(ptr != NULL){
         while (ptr != NULL){
             if(ptr->info.Student_ID == id){
-                printf("\n\nStudent Data\n\n");
+                printf("Student Data\n");
                 printf("Student ID: %d\n",ptr->info.Student_ID);
                 printf("Student Year: %d\n",ptr->info.Student_year);
                 printf("Course 1 ID: %d\n",ptr->info.Course1_ID);
@@ -83,7 +86,7 @@ bool SDB_ReadEntry(uint32 id){
                 printf("Course 2 ID: %d\n",ptr->info.Course2_ID);
                 printf("Course 2 Grade: %d\n",ptr->info.Course2_grade);
                 printf("Course 3 ID: %d\n",ptr->info.Course3_ID);
-                printf("Course 3 Grade: %d\n",ptr->info.Course3_grade);
+                printf("Course 3 Grade: %d\n\n\n",ptr->info.Course3_grade);
                 return true;
             }
             ptr = ptr->link;
@@ -94,7 +97,7 @@ bool SDB_ReadEntry(uint32 id){
 }
 
 void SDB_GetList(uint8* count,uint32* list){
-    printf("Total Students ID: %d\n\n",*count);
+    printf("Total Students ID: %d\n",*count);
     Node* ptr = List;
     for(uint8 i=0;i<*count;i++){
         list[i]=ptr->info.Student_ID;
@@ -113,8 +116,6 @@ bool SDB_IsIdExist(uint32 id){
             }
             ptr = ptr->link;
         }
-        printf("This Id Not Existed");
-        return false;
     }
     return false;
 }

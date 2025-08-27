@@ -4,16 +4,15 @@
 #include "SDB.h"
 #include "singleLinkedList.h"
 
-Node* createList(int numberOfNodes,student* database){
-   Node* startNew = NULL;
-   startNew = insertNodeInBegining(&database[0]);
+void createList(uint8 numberOfNodes,student* database){
+   insertNodeInBegining(&database[0]);
 
-    for(int i=1;i<numberOfNodes;i++){
+    for(uint16 i=1;i<numberOfNodes;i++){
         insertNodeAtEnd(&database[i]);
     }
-    return startNew;
 }
-Node* insertNodeInBegining(student* data){
+
+void insertNodeInBegining(student* data){
     Node* temp = (Node*)malloc(sizeof(Node));
     if(temp != NULL){
         temp->info = *(data);
@@ -21,18 +20,23 @@ Node* insertNodeInBegining(student* data){
         temp->link = List;
         List = temp;
     }
-    return List;
 }
 
 bool insertNodeAtEnd(student* data){
     if(SDB_isFull()){
-        printf("Failed..Database Is Full!");
+        printf("Database Is Full. Cannot Add More Students.\n\n\n");
         return false;
     }
     Node* temp = (Node*)malloc(sizeof(Node));
-    if(temp != NULL){
-        temp->info = *(data);
+    if(temp == NULL)return false;
 
+    temp->info = *(data);
+    temp->link = NULL;
+
+    if(List == NULL){
+        List = temp;
+    }
+    else{
         Node* ptr = List;
         while(ptr->link != NULL){
             ptr = ptr->link;
@@ -40,13 +44,45 @@ bool insertNodeAtEnd(student* data){
         ptr->link = temp;
         temp->link = NULL;
     }
+
     return true;
 }
+
+bool deleteNode(uint32 ID){
+    if(List == NULL)return false;
+
+    Node* temp = NULL;
+    if(List->info.Student_ID == ID){
+        temp = List;
+        List=List->link;
+        free(temp);
+    }
+    else{
+        Node* ptr = List;
+        while(ptr->link != NULL){
+            if(ptr->link->info.Student_ID == ID){
+                temp = ptr->link;
+                break;
+            }
+            ptr = ptr->link;
+        }
+        if(ptr->link == NULL){
+            return false;
+        }
+        else{
+            ptr->link = temp->link;
+            free(temp);
+        }
+    }
+    return true;
+}
+
+
 void displayList(){
     if(List != NULL){
         Node* ptr = List;
-        printf("List Elements Are: \n\n");
-        int count_student = 1;
+        printf("Student List: \n\n");
+        uint16 count_student = 1;
         while(ptr != NULL){
             printf("Student %d Data\n\n",count_student);
             printf("Student ID: %d\n",ptr->info.Student_ID);
@@ -64,7 +100,7 @@ void displayList(){
         printf("\n");
     }
     else{
-        printf("Empty List\n");
+        printf("The Student List Is Empty.\n");
     }
 }
 

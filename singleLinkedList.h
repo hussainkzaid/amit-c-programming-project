@@ -10,9 +10,10 @@ typedef struct linkedList{
 
 extern Node* List;
 
-Node* createList(int numberOfNodes,student* database);
-Node* insertNodeInBegining(student* data);
-bool  insertNodeAtEnd(student* data);
+void createList(uint8 numberOfNodes,student* database);
+void insertNodeInBegining(student* data);
+bool insertNodeAtEnd(student* data);
+bool deleteNode(uint32 ID);
 void displayList();
 
 #endif

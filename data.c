@@ -16,6 +16,6 @@ void insert_data(){
         {6572000,2029,141516,88,151617,82,161718,94},
         {19611971,2024,181920,60,192021,71,202122,84}
         };
-    List = createList(DATABASE_STUDENT,&arr[0]);
+    createList(DATABASE_STUDENT,&arr[0]);
     return;
 }
