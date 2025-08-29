@@ -4,6 +4,10 @@
 #include "SDB.h"
 #include "singleLinkedList.h"
 
+
+// Checks if the database is full
+// Iterates through the linked list to count students
+// Returns true if number of nodes >= DATABASE_MAX_STUDENT
 bool SDB_isFull(){
     uint16 count_student = 0;
     Node* ptr = List;
@@ -17,6 +21,9 @@ bool SDB_isFull(){
     return true;
 }
 
+
+// Returns the number of students currently in the database
+// Simple traversal and counter
 uint8 SDB_GetUsedSize(){
     uint8 count_student = 0;
     Node* ptr = List;
@@ -27,13 +34,22 @@ uint8 SDB_GetUsedSize(){
     return count_student;
 }
 
+
+// Adds a new student by prompting user input
+// Fills a student struct from input, then inserts it at the end
+// Useful for user-driven data entry at runtime
 bool SDB_AddEntry() {
     student data;
 
     printf("Please Enter Student Data:\n");
-
+    // ... scanf input fields
     printf("Student ID: ");
     if (scanf("%d", &data.Student_ID) != 1) return false;
+    // check for duplicate IDs
+    if (SDB_IsIdExist(data.Student_ID)) {
+    printf("This ID Already Exists. Entry Rejected.\n\n\n");
+    return false;
+    }
 
     printf("Student Year: ");
     if (scanf("%d", &data.Student_year) != 1) return false;
@@ -64,6 +80,8 @@ bool SDB_AddEntry() {
 }
 
 
+// Deletes a student by ID
+// Calls deleteNode() and prints result
 void SDB_DeletEntry(uint32 id){
     if(deleteNode(id)){
         printf("Student Data Deleted\n\n\n");
@@ -73,11 +91,16 @@ void SDB_DeletEntry(uint32 id){
     }
 }
 
+
+// Reads and displays student info by ID
+// Searches the list and prints data if found
+// Useful for viewing specific student records
 bool SDB_ReadEntry(uint32 id){
     Node* ptr = List;
     if(ptr != NULL){
         while (ptr != NULL){
             if(ptr->info.Student_ID == id){
+                // print student data
                 printf("Student Data\n");
                 printf("Student ID: %d\n",ptr->info.Student_ID);
                 printf("Student Year: %d\n",ptr->info.Student_year);
@@ -96,6 +119,10 @@ bool SDB_ReadEntry(uint32 id){
     return false;
 }
 
+
+// Populates a list of all student IDs
+// Fills the provided array `list` with IDs from the linked list
+// `count` should already be set using SDB_GetUsedSize()
 void SDB_GetList(uint8* count,uint32* list){
     printf("Total Students ID: %d\n",*count);
     Node* ptr = List;
@@ -107,6 +134,9 @@ void SDB_GetList(uint8* count,uint32* list){
     printf("\n\n");
 }
 
+
+// Checks if a student ID exists in the database
+// Simple linear search in the linked list
 bool SDB_IsIdExist(uint32 id){
     Node* ptr = List;
     if(ptr != NULL){

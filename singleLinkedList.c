@@ -4,6 +4,10 @@
 #include "SDB.h"
 #include "singleLinkedList.h"
 
+Node* List = NULL;
+// Creates initial list from an array of students
+// Inserts first node at beginning, rest at the end
+// Efficient to initialize test data
 void createList(uint8 numberOfNodes,student* database){
    insertNodeInBegining(&database[0]);
 
@@ -12,6 +16,10 @@ void createList(uint8 numberOfNodes,student* database){
     }
 }
 
+
+
+// Inserts a node at the beginning of the list
+// Allocates memory, copies data, points to old head
 void insertNodeInBegining(student* data){
     Node* temp = (Node*)malloc(sizeof(Node));
     if(temp != NULL){
@@ -22,6 +30,10 @@ void insertNodeInBegining(student* data){
     }
 }
 
+
+// Appends a node to the end of the list
+// Traverses to last node, inserts new node there
+// Checks if DB is full before adding
 bool insertNodeAtEnd(student* data){
     if(SDB_isFull()){
         printf("Database Is Full. Cannot Add More Students.\n\n\n");
@@ -48,6 +60,9 @@ bool insertNodeAtEnd(student* data){
     return true;
 }
 
+
+// Deletes a student node by ID
+// Searches for the node, adjusts links, and frees memory
 bool deleteNode(uint32 ID){
     if(List == NULL)return false;
 
@@ -78,6 +93,8 @@ bool deleteNode(uint32 ID){
 }
 
 
+// Displays all student records in the list
+// Traverses the list and prints each student's data
 void displayList(){
     if(List != NULL){
         Node* ptr = List;

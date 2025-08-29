@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1756227604 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\main.c
+1756467043 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\main.c
 	<stdio.h>
 	<stdlib.h>
 	"STD.h"
@@ -12,14 +12,14 @@
 1756231309 c:\users\hussa\onedrive\desktop\amit-c project\student_project\sdb.h
 	"STD.h"
 
-1756293173 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\sdb.c
+1756469242 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\sdb.c
 	<stdio.h>
 	<stdlib.h>
 	"STD.h"
 	"SDB.h"
 	"singleLinkedList.h"
 
-1756294698 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\sdbapp.c
+1756469379 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\sdbapp.c
 	<stdio.h>
 	<stdlib.h>
 	"STD.h"
@@ -30,14 +30,14 @@
 	"STD.h"
 	"SDB.h"
 
-1756294606 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\singlelinkedlist.c
+1756468972 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\singlelinkedlist.c
 	<stdio.h>
 	<stdlib.h>
 	"STD.h"
 	"SDB.h"
 	"singleLinkedList.h"
 
-1756284943 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\data.c
+1756468578 source:c:\users\hussa\onedrive\desktop\amit-c project\student_project\data.c
 	<stdio.h>
 	<stdlib.h>
 	"STD.h"
